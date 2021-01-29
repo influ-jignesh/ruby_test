@@ -49,6 +49,8 @@ class UsersController < ApplicationController
 
 		session[:user_id] = nil if @user == current_user
 
+		
+
 		flash[:notice] = "User Deleted Succesfully"
 		redirect_to users_path
 	end
