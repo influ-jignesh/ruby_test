@@ -1,0 +1,11 @@
+<h2 class="text-center mt-4 mb-4">Users Listing Page</h2>
+
+
+<!-- #<%= link_to 'Add New User', 'signup', class: "btn btn-primary justify-content-md-center mb-4 d-flex"%> -->
+
+
+<%= render 'users' %>
+
+<div class="flickr_pagination">
+    <%= will_paginate @users, :container => false %>
+</div>

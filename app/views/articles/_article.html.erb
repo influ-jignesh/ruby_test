@@ -1,0 +1,22 @@
+<div class="row pb-5" >
+	<% @articles.each_with_index do |article,i| %>		
+			<div class="col-4">
+				<div class="card text-center mt-3">
+				  <div class="card-header">
+				   <%= article.title %> by <%= article.user.username %>
+				  </div>
+				  <div class="card-body">
+				    <p class="card-text"><td><%= article.description%></td></p>			    
+				    <%#= link_to 'Show', article_path(article), class: "btn btn-outline-success" %>				    
+				    <% if logged_in? && (article.user == current_user || current_user.admin?) %>
+						<%= link_to 'Edit', edit_article_path(article), class: "btn btn-outline-primary" %>
+						<%= link_to 'Delete', article_path(article), method: :Delete, data: {confirm:"Are You Sure You want Delete This?"}, class: "btn btn-outline-danger" %>
+					<% end %>
+				  </div>
+				  <div class="card-footer text-muted">	    
+					<small>Created <%= time_ago_in_words(article.created_at) %> ago, edited <%= time_ago_in_words(article.updated_at) %> ago</small>
+				  </div>
+				</div>	
+			</div>
+	<% end %>	
+</div>

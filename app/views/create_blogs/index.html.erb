@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Create Blogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @create_blogs.each do |create_blog| %>
+      <tr>
+        <td><%= link_to 'Show', create_blog %></td>
+        <td><%= link_to 'Edit', edit_create_blog_path(create_blog) %></td>
+        <td><%= link_to 'Destroy', create_blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Create Blog', new_create_blog_path %>

@@ -1,0 +1,38 @@
+    <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+<h2>Details</h2></br>
+
+<a href="/get_articles">View List</a>
+
+</br>
+
+<form accept-charset="UTF-8" action="/update_article" method="post">
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	<label>Title :</label>
+	<input type="hidden" name="id" value="<%= @edt_article.id %>">
+	<input type="text" name="title" value="<%= @edt_article.title %>">
+	</br>
+	<label>Description: </label>
+	<input type="text" name="description" value="<%= @edt_article.description %>">
+	<input name="update" type="submit" value="Update" />
+</form>
+
+
+<table border="1">	
+	<tr>
+		<th>srno.</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Delete</th>
+	</tr>
+	<% @article_data.each_with_index do |t,i| %>
+		<% if  params[:id] != t.id%>
+			<tr>
+				<td> No : <%= i %></td>
+				<td> Title : <a href="/get_articles/edit/<%=t.title %>/"> <%= t.title %></a></td>
+				<td> desc : <%= t.description %></td>
+				<td> <a href="/get_articles/delete/<%=t.id %>/"> Delete</a></td>
+			</tr>
+		<% end %> 					
+	<% end %> 			
+</table>

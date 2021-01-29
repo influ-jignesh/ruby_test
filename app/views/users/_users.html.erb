@@ -1,0 +1,21 @@
+<div class="row">
+	<% @users.each_with_index do |user,i| %>		
+			<div class="col-4">
+				<div class="card text-center mt-3">
+				  <div class="card-header">
+				   <%= link_to user.username, user %>
+				  </div>
+				  <div class="card-body">
+				    <p class="card-text"><td><%= user.email%></td></p>		
+				    <% if logged_in? && (user == current_user || current_user.admin?) %>	    
+					<%= link_to 'Edit', edit_user_path(user), class: "btn btn-outline-primary" %>
+					<%= link_to 'Delete', user_path(user), method: :Delete, data: {confirm:"Are You Sure You want Delete This?"}, class: "btn btn-outline-danger" %>
+					<% end %>
+				  </div>
+				  <div class="card-footer text-muted">	    
+					<small>Joined <%= time_ago_in_words(user.created_at) %></small>
+				  </div>
+				</div>	
+			</div>
+	<% end %>	
+</div>

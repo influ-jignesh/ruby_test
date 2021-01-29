@@ -1,0 +1,26 @@
+
+<h2>Add Article</h2></br>
+
+<% if @article.errors.any? %>
+
+	<p>Erros! Please Check...</p>
+	<ul>
+		<% @article.errors.full_messages.each do |msg|%>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<a href="/get_articles">View List</a>
+
+</br>
+
+<form accept-charset="UTF-8" action="/add_article" method="post">
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	<label>Title :</label></br></br>
+	<input type="text" name="title" value="">
+	</br></br>
+	<label>Description: </label></br></br>
+	<input type="text" name="description" value=""></br></br>
+	<input name="save" type="submit" value="Add" />
+</form>

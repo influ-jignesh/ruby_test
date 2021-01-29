@@ -1,0 +1,20 @@
+<br>
+<br>
+<br>
+<a href="/get_articles/add/view">Add Article</a>
+<table border="1">	
+	<tr>
+		<th>srno.</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Delete</th>
+	</tr>
+	<% @article_data.each_with_index do |t,i| %>
+		<tr>
+			<td> No : <%= i %></td>
+			<td> Title : <a href="/get_articles/edit/<%=t.title %>/"> <%= t.title %></a></td>
+			<td> desc : <%= t.description %></td>
+			<td> <a href="/get_articles/delete/<%=t.id %>/" > Delete</a></td>
+		</tr>
+	<% end %> 			
+</table>

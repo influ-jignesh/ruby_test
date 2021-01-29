@@ -1,0 +1,11 @@
+
+<h2 class="text-center m-4">Details</h2>
+
+<% if @user.id == 1 %>
+	<img src="https://graph.facebook.com/3896977530358503/picture?type=large">
+<% end %>
+
+<p class="card-text">UserName : <%= @user.username %></p>	
+<p class="card-text">Email: <%= @user.email %></p>
+
+<%= render 'articles/article'%>
