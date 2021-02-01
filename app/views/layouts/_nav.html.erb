@@ -39,7 +39,7 @@
             </li>
           <% end %>
 
-          <% if logged_in? && current_user.admin %>
+          <% if logged_in? && current_user.admin? %>
             <li class="nav-item">
               <%= link_to 'Users', users_path, class: 'nav-link' %>
             </li>

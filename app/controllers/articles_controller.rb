@@ -90,19 +90,28 @@ class ArticlesController < ApplicationController
 	end
 	
 	def article_add
+		
+		@article = Article.new(title: params[:title], description: params[:description], user_id: current_user.id)
+		
+		if @article.save
+			#render :json => {:status => true, :redirect_to => get_articles_url}			
+			respond_to do |f|	
+				flash[:notice] = "Article Added Succesfully"		
+			  	f.html { redirect_to '/get_articles'}			
+			end
+		else
+			
+			render :json => {:status => false, :errors => @article.errors.full_messages}
+		end
 
-		@article = Article.new(
-			:title => params[:title], 
-			:description => params[:description]
-		)
 		# @article[:title] = params[:title]
 		# @article[:description] = params[:description]
 
-		if @article.save			
-			redirect_to '/get_articles', flash: {notice: "Article Was Added Successfully"}
-		else
-			render "articles/mycode/add_view"
-		end
+		# if @article.save			
+		# 	redirect_to '/get_articles', flash: {notice: "Article Was Added Successfully"}
+		# else
+		# 	render "articles/mycode/add_view"
+		# end
 
 		#Article.create(:title => params[:title], :description => params[:description])
 
@@ -124,9 +133,22 @@ class ArticlesController < ApplicationController
 	def article_updated
 		
 		@articleid = params[:id]
-		Article.update(@articleid, :title => params[:title], :description => params[:description])
+		
+		@article = Article.update(@articleid, title: params[:title], description: params[:description])
+		
+		
+		# flash[:notice] = "Article Updated Succesfully"		
+		# redirect_to '/get_articles'	
 
-		redirect_to '/get_articles'
+		if @article
+			#render :json => {:status => true, :redirect_to => get_articles_url}			
+			respond_to do |f|	
+				flash[:notice] = "Article Updated Succesfully"		
+			  	f.html { redirect_to '/get_articles'}			
+			end
+		else			
+			render :json => {:status => false, :errors => @article.errors.full_messages}
+		end
 	end
 
 	def delete_article

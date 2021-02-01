@@ -15,12 +15,24 @@
 
 </br>
 
-<form accept-charset="UTF-8" action="/add_article" method="post">
+<div id="errors" class="alert alert-danger" role="alert" style="display: none">
+	<b>Errors Please Check!</b>
+	<ul></ul>	
+</div>
+<div class="alert alert-success" role="alert" id="suc_msg" style="display: none">	
+</div>
+
+<form id="article_add_form">
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	
 	<label>Title :</label></br></br>
 	<input type="text" name="title" value="">
+	
 	</br></br>
+	
 	<label>Description: </label></br></br>
 	<input type="text" name="description" value=""></br></br>
-	<input name="save" type="submit" value="Add" />
+	
+	<a onclick="add_update_article(this);" class="btn btn-success text-white" form-id="article_add_form">Add</a>
+	<!-- <input name="save" type="submit" value="Add" /> -->
 </form>

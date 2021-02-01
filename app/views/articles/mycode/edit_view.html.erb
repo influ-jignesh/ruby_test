@@ -5,20 +5,25 @@
 <a href="/get_articles">View List</a>
 
 </br>
-
-<form accept-charset="UTF-8" action="/update_article" method="post">
+</br>
+<form accept-charset="UTF-8" id="article_update_form" method="post">
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 	<label>Title :</label>
+
 	<input type="hidden" name="id" value="<%= @edt_article.id %>">
 	<input type="text" name="title" value="<%= @edt_article.title %>">
+
+	</br>
 	</br>
 	<label>Description: </label>
 	<input type="text" name="description" value="<%= @edt_article.description %>">
-	<input name="update" type="submit" value="Update" />
+	<!-- <input name="update" type="submit" value="Update" /> -->
+	</br></br>
+	<a onclick="add_update_article(this);" class="btn btn-success text-white" form-id="article_update_form">Update</a>
 </form>
+</br></br></br>
 
-
-<table border="1">	
+<!-- <table border="1">	
 	<tr>
 		<th>srno.</th>
 		<th>Title</th>
@@ -35,4 +40,4 @@
 			</tr>
 		<% end %> 					
 	<% end %> 			
-</table>
+</table> -->
