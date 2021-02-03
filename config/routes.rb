@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'pages#index'
   get 'about', to: 'pages#about' 
 
-
+  get "mail_send" => "users#send_email"
   # My Articles Code start  
     get "get_articles" => "articles#get_all_article"
     get "get_articles/add/view" => "articles#add_article_view"

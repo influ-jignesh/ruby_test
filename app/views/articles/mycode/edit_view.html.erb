@@ -19,8 +19,7 @@
 	<input type="text" name="description" value="<%= @edt_article.description %>">
 	<!-- <input name="update" type="submit" value="Update" /> -->
 	</br></br>
-	<select name="categories[]" multiple>
-		<option value="">Select Categories</option>
+	<select name="categories[]" multiple size="5">
   		<% @categories.each_with_index do |c,i|%>
   			
   			<option value="<%= c.id %>" <% if @edt_article.category_id.include?  c.id %>  selected <%end%> >

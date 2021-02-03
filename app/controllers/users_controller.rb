@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 
 	before_action :require_same_user, only: [:edit, :update, :destroy]
 
+	def send_email
+		UserMailer.welcome_email("jignesh.nai@inuscg.com").deliver	
+		redirect_to root_path
+	end
 
 	def index
 		#@users = User.all
@@ -21,8 +25,11 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
+
 			flash[:notice] = "#{@user.username} signup Done!"
+			
 			session[:user_id] = @user.id
+			
 			redirect_to users_path
 		else
 			render 'new'
