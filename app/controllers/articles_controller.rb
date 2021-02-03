@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
 	def index
 		#@articles = Article.all
 		@articles = Article.paginate(page: params[:page], per_page: 6)
+		#fresh_when(@articles)
 	end	
 	
 	def show
@@ -79,25 +80,36 @@ class ArticlesController < ApplicationController
 		@article_data = Article.all
 		#byebug
 		#render :action => '/articles/test'
-		render "articles/mycode/view"
+		# if stale?(@article_data)
+			render "articles/mycode/view"
+		# end	
 	end
 
 	def add_article_view
 
 		@article = Article.new
+		@categories = Category.all
 		render "articles/mycode/add_view"
 		
 	end
 	
 	def article_add
-		
-		@article = Article.new(title: params[:title], description: params[:description], user_id: current_user.id)
+
+		@categoryids = params[:categories]
+
+		@categoryids = @categoryids.blank? ? [] : @categoryids.map { |cat| cat.to_i }
+
+		@article = Article.new(
+			title: 			params[:title], 
+			description: 	params[:description], 
+			user_id: 		current_user.id, 
+			category_id: 	@categoryids)
 		
 		if @article.save
 			#render :json => {:status => true, :redirect_to => get_articles_url}			
 			respond_to do |f|	
 				flash[:notice] = "Article Added Succesfully"		
-			  	f.html { redirect_to '/get_articles'}			
+			  	f.html { redirect_to get_articles_path}			
 			end
 		else
 			
@@ -126,15 +138,24 @@ class ArticlesController < ApplicationController
 		@edt_article = Article.find_by_title(title_data)
 		
 		@article_data = Article.all
+		
+		@categories = Category.all
 
 		render "articles/mycode/edit_view"
 	end
 
 	def article_updated
+
+		@categoryids = params[:categories]
+
+		@categoryids = @categoryids.blank? ? [] : @categoryids.map { |cat| cat.to_i }
 		
 		@articleid = params[:id]
 		
-		@article = Article.update(@articleid, title: params[:title], description: params[:description])
+		@article = Article.update(@articleid, 
+			title: 			params[:title], 
+			description: 	params[:description],
+			category_id: 	@categoryids)
 		
 		
 		# flash[:notice] = "Article Updated Succesfully"		

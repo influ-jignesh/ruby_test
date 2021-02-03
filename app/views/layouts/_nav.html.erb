@@ -12,6 +12,13 @@
           <li class="nav-item">
             <%= link_to 'Articles', articles_path, class: 'nav-link' %>
           </li>
+          <% if logged_in? && current_user.admin? %>
+            <li class="nav-item">
+              <a href="<%= categories_path %>" class="nav-link">Categories</a>
+              <%#= link_to 'Articles', articles_path, class: 'nav-link' %>
+            </li>
+          <% end %>
+          
           <% if logged_in? %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

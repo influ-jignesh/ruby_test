@@ -1,0 +1,28 @@
+
+<h2>Add Article</h2></br>
+
+<% if @categories.present? && @categories.errors.any? %>
+
+	<p>Erros! Please Check...</p>
+	<ul>
+		<% @categories.errors.full_messages.each do |msg|%>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<a href="<%= categories_path %>">View All Categories</a>
+
+</br>
+
+<form id="article_add_form" action="<%= category_add_path %>" method="POST">
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	
+	<div style="display: flex; margin: 10px; justify-content: space-around;">
+		<label>Category Name :</label>
+		<input type="text" name="name">
+	</div>
+	<div style="display: flex; margin: 10px; justify-content: center;">
+		<input name="save" type="submit" value="Add" />
+	</div>
+</form>

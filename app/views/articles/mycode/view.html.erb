@@ -7,14 +7,18 @@
 		<th>srno.</th>
 		<th>Title</th>
 		<th>Description</th>
+		<th>Category</th>
 		<th>Delete</th>
 	</tr>
 	<% @article_data.each_with_index do |t,i| %>
 		<tr>
-			<td> No : <%= i %></td>
-			<td> Title : <a href="/get_articles/edit/<%=t.title %>"> <%= t.title %></a></td>
-			<td> desc : <%= t.description %></td>
-			<td> <a href="/get_articles/delete/<%=t.id %>" onclick="return confirm('Are you sure?')"> Delete</a></td>
+			<td> <%= i %></td>
+			<td> <a href="/get_articles/edit/<%=t.title %>"> <%= t.title %></a></td>
+			<td> <%= t.description %></td>
+			<td> 
+				<%= Category.where(id: t.category_id).pluck(:name).map {|str| "#{str}"}.join(',') %>
+			</td>
+			<td> <a href="/get_articles/delete/ <%=t.id %>" onclick="return confirm('Are you sure?')"> Delete</a></td>
 		</tr>
 	<% end %> 			
 </table>

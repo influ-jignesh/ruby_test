@@ -1,0 +1,18 @@
+<br>
+<br>
+<br>
+<a href="/add/new/category">Add Category</a>
+<table border="1">	
+	<tr>
+		<th>srno.</th>
+		<th>Name</th>
+		<th>Delete</th>
+	</tr>
+	<% @categories.each_with_index do |t,i| %>
+		<tr>
+			<td> No : <%= i %></td>
+			<td> Name : <a href="<%= category_edit_path t.name %>"> <%= t.name %></a></td>			
+			<td> <a href="<%= category_delete_path t.name %>" onclick="return confirm('Are you sure?')"> Delete</a></td>
+		</tr>
+	<% end %> 			
+</table>

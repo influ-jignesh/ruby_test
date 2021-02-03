@@ -32,7 +32,14 @@
 	
 	<label>Description: </label></br></br>
 	<input type="text" name="description" value=""></br></br>
-	
+
+	<select name="categories[]" multiple>
+		<option value="">Select Categories</option>
+  		<% @categories.each_with_index do |c,i|%>
+  			<option value="<%= c.id %>"><%= c.name %></option>
+  		<% end%>
+	</select>
+
 	<a onclick="add_update_article(this);" class="btn btn-success text-white" form-id="article_add_form">Add</a>
 	<!-- <input name="save" type="submit" value="Add" /> -->
 </form>

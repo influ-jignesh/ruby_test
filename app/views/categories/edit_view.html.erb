@@ -1,0 +1,29 @@
+
+<h2>Details</h2></br>
+
+<% if @categories.present? && @categories.errors.any? %>
+
+	<p>Erros! Please Check...</p>
+	<ul>
+		<% @categories.errors.full_messages.each do |msg|%>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<a href="<%= categories_path %>">View All Categories</a>
+
+</br>
+</br>
+<form accept-charset="UTF-8" action="<%= category_update_path %>" method="post">
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	<label>Title :</label>
+
+	<input type="hidden" name="id" value="<%= @categories.id %>">
+	<div style="display: flex; margin: 10px; justify-content: space-around;">
+		<input type="text" name="name" value="<%= @categories.name %>">
+	</div>
+	<div style="display: flex; margin: 10px; justify-content: center;">
+		<input name="update" type="submit" value="Update" />
+	</div>
+</form>
